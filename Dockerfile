@@ -1,10 +1,12 @@
 ARG VERSION=0.23.1
 
-FROM unprivileged-mainline-slim
+FROM ghcr.io/linagora/tmail-web:v${VERSION} AS extract
+
+FROM ghcr.io/polarix-containers/nginx:unprivileged-mainline-slim
 ARG VERSION
 
-COPY --from=ghcr.io/linagora/tmail-web:v${VERSION} /etc/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=ghcr.io/linagora/tmail-web:v${VERSION} /usr/share/nginx/html /usr/share/nginx/html
+COPY --from=extract /etc/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=extract /usr/share/nginx/html /usr/share/nginx/html
 
 USER root
 
