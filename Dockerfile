@@ -1,4 +1,4 @@
-ARG VERSION=0.26.8
+ARG VERSION=0.28.18
 
 FROM ghcr.io/linagora/tmail-web:v${VERSION} AS extract
 
